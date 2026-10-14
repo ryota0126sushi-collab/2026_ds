@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>こんにちは</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 64px;
+            background: #ffffff;
+            color: #000000;
+            font-family: "Noto Sans JP", "Hiragino Kaku Gothic ProN", "Yu Gothic", sans-serif;
+        }
+
+        .greeting-text {
+            min-height: 1.2em;
+            font-size: clamp(48px, 14vw, 160px);
+            font-weight: 700;
+            letter-spacing: 0.05em;
+        }
+
+        .greeting-text.is-visible {
+            animation: revealGreeting 2.4s ease-out forwards;
+        }
+
+        .greeting-text {
+            opacity: 0;
+            transform: translateY(24px);
+        }
+
+        @keyframes revealGreeting {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .greeting-button {
+            padding: 16px 48px;
+            border: 2px solid #000000;
+            background: #ffffff;
+            color: #000000;
+            font-family: inherit;
+            font-size: 18px;
+            font-weight: 700;
+            letter-spacing: 0.1em;
+            cursor: pointer;
+            transition: background 0.3s, color 0.3s;
+        }
+
+        .greeting-button:hover {
+            background: #000000;
+            color: #ffffff;
+        }
+
+        .greeting-button:active {
+            transform: scale(0.97);
+        }
+    </style>
+</head>
+<body>
+    <p class="greeting-text" id="greeting-text"></p>
+    <button class="greeting-button" id="greeting-button" type="button">押す</button>
+
+    <script>
+        const greeting_message = "こんにちは"
+        const greeting_text_element = document.getElementById("greeting-text")
+        const greeting_button_element = document.getElementById("greeting-button")
+
+        function showGreetingSlowly() {
+            greeting_text_element.textContent = greeting_message
+            greeting_text_element.classList.remove("is-visible")
+            void greeting_text_element.offsetWidth
+            greeting_text_element.classList.add("is-visible")
+        }
+
+        greeting_button_element.addEventListener("click", showGreetingSlowly)
+    </script>
+</body>
+</html>
